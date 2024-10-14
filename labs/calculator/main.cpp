@@ -36,7 +36,7 @@ string infixToPostfix(const string& expression) {
             }
             operators.pop();  // Видаляємо відкриваючу дужку з стеку
         }
-        else {  // Оператор
+        else {
             while (!operators.empty() && precedence(operators.top()) >= precedence(c)) {
                 postfix += operators.top();
                 operators.pop();
@@ -61,7 +61,7 @@ int performOperation(char operation, int operand1, int operand2) {
     case '-': return operand1 - operand2;
     case '*': return operand1 * operand2;
     case '/': return operand1 / operand2;
-    default: throw invalid_argument("Unknown operation");
+
     }
 }
 
@@ -73,7 +73,7 @@ int evaluatePostfix(const string& expression) {
         if (isdigit(c)) {
             operands.push(c - '0');  // Перетворюємо символ на цифру і додаємо в стек
         }
-        else {  // Оператор
+        else {
             int operand2 = operands.top(); operands.pop();
             int operand1 = operands.top(); operands.pop();
             int result = performOperation(c, operand1, operand2);
@@ -82,6 +82,7 @@ int evaluatePostfix(const string& expression) {
     }
 
     return operands.top();
+
 }
 
 int main() {
